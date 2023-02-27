@@ -6,7 +6,6 @@ blueprint:
         blinds:
           name: Blind selector
           description: Which blinds to automate
-          default: []
           selector:
             target:
               entity:
