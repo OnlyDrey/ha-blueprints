@@ -1,0 +1,85 @@
+blueprint:
+    name: Blind automation configurator
+    description: This blueprints is used to open and close blinds based on the time of day.
+    domain: automation
+    input: 
+        blinds:
+          name: Blind selector
+          description: Which blinds to automate
+          default: 0
+          selector:
+            entity:
+              domain: cover
+        open_time:
+          name: Opening Time
+          description: When to open the blinds.
+          selector:
+            time:
+        open_blinds:
+          name: Open blinds position
+          description: Position to close the blinds to
+          default: 75
+          selector:
+            number:
+              min: 0
+              max: 100
+        close_time:
+          name: Closing Time
+          description: When to close the blinds.
+          selector:
+            time:
+        close_blinds:
+          name: Close blinds position
+          description: Position to close the blinds to
+          default: 0
+          selector:
+            number:
+              min: 0
+              max: 100
+        weekdays:
+          name: Days
+          description: Which days should the automation run?
+          default: []
+          selector:
+            select:
+              options:
+                - label: Monday
+                  value: mon
+                - label: Tuesday
+                  value: tue
+                - label: Wednesday
+                  value: wed
+                - label: Thursday
+                  value: thu
+                - label: Friday
+                  value: fri
+                - label: Saturday
+                  value: sat
+                - label: Sunday
+                  value: sun
+                custom_value: false
+                multiple: true
+trigger:
+  - platform: time
+    at: !input open_time
+  - platform: time
+    at: !input close_time
+
+action:
+  - choose:
+      - conditions:
+          - condition: time
+            weekday: null
+            after: !input open_time
+        sequence:
+          - service: cover.set_cover_position
+            data:
+              position: !input open_blinds
+      - conditions:
+          - condition: time
+            weekday: null
+            after: !input close_time
+        sequence:
+          - service: cover.set_cover_position
+            data:
+              position: !input close_blinds
