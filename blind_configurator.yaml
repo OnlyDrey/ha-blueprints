@@ -16,19 +16,19 @@ blueprint:
         open_blinds:
           name: Open blinds
           description: Blinds to open
-          default: []
           selector:
             action: 
               service: cover.set_cover_position
-              data: {}
+              data: 
+                position: 75
         close_blinds:
           name: Close blinds
           description: Blinds to close
-          default: []
           selector:
             action: 
               service: cover.set_cover_position
-              data: {}
+              data: 
+                position: 0
 trigger:
   - platform: time
     at: !input open_time
