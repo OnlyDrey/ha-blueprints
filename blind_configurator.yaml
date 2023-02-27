@@ -1,0 +1,53 @@
+blueprint:
+    name: Blind configurator
+    description: This blueprints is used to open and close blinds based on the time of day.
+    domain: automation
+    input: 
+        open_time:
+          name: Opening Time
+          description: When to open the blinds.
+          selector:
+            time:
+        close_time:
+          name: Closing Time
+          description: When to close the blinds.
+          selector:
+            time:
+        open_blinds:
+          name: Open blinds
+          description: Blinds to open
+          default: []
+          selector:
+            action: 
+              service: cover.set_cover_position
+              data: 
+                position: 75
+        close_blinds:
+          name: Close blinds
+          description: Blinds to close
+          default: []
+          selector:
+            action: 
+              service: cover.set_cover_position
+              data: 
+                position: 0
+trigger:
+  - platform: time
+    at: !input open_time
+  - platform: time
+    at: !input close_time
+
+action:
+  - choose:
+      - conditions:
+          - condition: time
+            weekday: null
+            after: !input open_time
+        sequence: !input open_blinds
+      - conditions:
+          - condition: time
+            weekday: null
+            after: !input close_time
+        sequence: !input close_blinds
+    default: []
+mode: single
