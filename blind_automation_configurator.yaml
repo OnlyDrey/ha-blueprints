@@ -6,13 +6,14 @@ blueprint:
         blinds:
           name: Blind selector
           description: Which blinds to automate
-          default: 0
+          default: []
           selector:
             entity:
               domain: cover
         open_time:
           name: Opening Time
           description: When to open the blinds.
+          default: "00:00:00"
           selector:
             time:
         open_blinds:
@@ -26,6 +27,7 @@ blueprint:
         close_time:
           name: Closing Time
           description: When to close the blinds.
+          default: "00:00:00"
           selector:
             time:
         close_blinds:
@@ -38,7 +40,7 @@ blueprint:
               max: 100
         weekday:
           name: Day of the week to use the Automation
-          default: [mon, tue, wed, thu, fri, sat, sun]
+          default: []
           selector:
             select:
               options:
