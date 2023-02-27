@@ -14,21 +14,21 @@ blueprint:
           selector:
             time:
         open_blinds:
-          name: Open blinds
-          description: Blinds to open
+          name: Open blinds position
+          description: Position to close the blinds to
+          default: 75
           selector:
-            action: 
-              service: cover.set_cover_position
-              data: 
-                position: 75
+            number:
+              min: 0
+              max: 100
         close_blinds:
-          name: Close blinds
-          description: Blinds to close
+          name: Close blinds position
+          description: Position to close the blinds to
+          default: 0
           selector:
-            action: 
-              service: cover.set_cover_position
-              data: 
-                position: 0
+            number:
+              min: 0
+              max: 100
 trigger:
   - platform: time
     at: !input open_time
@@ -41,11 +41,15 @@ action:
           - condition: time
             weekday: null
             after: !input open_time
-        sequence: !input open_blinds
+        sequence:
+          - service: cover.set_cover_position
+            data:
+              position: !input open_blinds
       - conditions:
           - condition: time
             weekday: null
             after: !input close_time
-        sequence: !input close_blinds
-    default: []
-mode: single
+        sequence:
+          - service: cover.set_cover_position
+            data:
+              position: !input close_blinds
