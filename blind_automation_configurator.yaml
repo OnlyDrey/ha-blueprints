@@ -40,7 +40,7 @@ blueprint:
               max: 100
         weekday:
           name: Day of the week to use the Automation
-          default: []
+          default: [mon, tue, wed, thu, fri, sat, sun]
           selector:
             select:
               options:
@@ -75,6 +75,8 @@ action:
           - service: cover.set_cover_position
             data:
               position: !input open_blinds
+            target:
+              device_id: !input 'blinds'
       - conditions:
           - condition: time
             weekday: !input 'weekday'
@@ -83,3 +85,5 @@ action:
           - service: cover.set_cover_position
             data:
               position: !input close_blinds
+            target:
+              device_id: !input 'blinds'
