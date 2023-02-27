@@ -8,8 +8,9 @@ blueprint:
           description: Which blinds to automate
           default: []
           selector:
-            entity:
-              domain: cover
+            target:
+              entity:
+                domain: cover
         open_time:
           name: Opening Time
           description: When to open the blinds.
