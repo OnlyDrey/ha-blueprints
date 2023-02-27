@@ -56,7 +56,6 @@ blueprint:
                 value: sat
               - label: Sunday
                 value: sun
-              custom_value: false
               multiple: true
 trigger:
   - platform: time
