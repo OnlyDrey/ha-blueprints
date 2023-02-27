@@ -20,8 +20,7 @@ blueprint:
           selector:
             action: 
               service: cover.set_cover_position
-              data: 
-                position: 75
+              data: {}
         close_blinds:
           name: Close blinds
           description: Blinds to close
@@ -29,8 +28,7 @@ blueprint:
           selector:
             action: 
               service: cover.set_cover_position
-              data: 
-                position: 0
+              data: {}
 trigger:
   - platform: time
     at: !input open_time
