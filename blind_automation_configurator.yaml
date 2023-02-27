@@ -9,8 +9,6 @@ blueprint:
           default: []
           selector:
             target:
-              entity:
-                domain: cover
         open_time:
           name: Opening Time
           description: When to open the blinds.
