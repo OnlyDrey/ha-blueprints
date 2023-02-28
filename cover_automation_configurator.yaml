@@ -1,6 +1,6 @@
 blueprint:
     name: Cover automation configurator
-    description: This blueprints is used to open and close covers based on the time of day.
+    description: This blueprint is used to open and close covers based on the time of day.
     domain: automation
     input: 
         covers:
@@ -18,7 +18,7 @@ blueprint:
             time:
         open_covers:
           name: Open covers position
-          description: Position to close the covers to
+          description: Position to close the covers to.
           default: 75
           selector:
             number:
@@ -32,7 +32,7 @@ blueprint:
             time:
         close_covers:
           name: Close covers position
-          description: Position to close the covers to
+          description: Position to close the covers to.
           default: 0
           selector:
             number:
@@ -76,7 +76,7 @@ action:
             data:
               position: !input open_covers
             target:
-              device_id: !input 'covers'
+              device_id: !input covers
       - conditions:
           - condition: time
             weekday: !input 'weekday'
@@ -86,4 +86,4 @@ action:
             data:
               position: !input close_covers
             target:
-              device_id: !input 'covers'
+              device_id: !input covers
