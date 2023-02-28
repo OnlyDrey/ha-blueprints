@@ -75,8 +75,7 @@ action:
           - service: cover.set_cover_position
             data:
               position: !input open_covers
-            target:
-              device_id: !input covers
+            target: !input covers
       - conditions:
           - condition: time
             weekday: !input 'weekday'
@@ -85,5 +84,4 @@ action:
           - service: cover.set_cover_position
             data:
               position: !input close_covers
-            target:
-              device_id: !input covers
+            target: !input covers
