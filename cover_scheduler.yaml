@@ -1,0 +1,87 @@
+blueprint:
+    name: Cover Scheduler 
+    description: This blueprint is used to open and close covers based on the time of day.
+    domain: automation
+    input: 
+        entities:
+          name: Target entities
+          description: Select which covers to automate.
+          selector:
+            target:
+              entity:
+                domain: cover
+        open_time:
+          name: Open time
+          description: When to open the covers.
+          default: "10:00:00"
+          selector:
+            time:
+        open:
+          name: Open position
+          description: Position to open the covers to.
+          default: 75
+          selector:
+            number:
+              min: 0
+              max: 100
+        close_time:
+          name: Close time
+          description: When to close the covers.
+          default: "19:00:00"
+          selector:
+            time:
+        close:
+          name: Close covers position
+          description: Position to close the covers to.
+          default: 0
+          selector:
+            number:
+              min: 0
+              max: 100
+        weekday:
+          name: Day of the week to use the Automation
+          default: [mon, tue, wed, thu, fri, sat, sun]
+          selector:
+            select:
+              options:
+              - label: Monday
+                value: mon
+              - label: Tuesday
+                value: tue
+              - label: Wednesday
+                value: wed
+              - label: Thursday
+                value: thu
+              - label: Friday
+                value: fri
+              - label: Saturday
+                value: sat
+              - label: Sunday
+                value: sun
+              multiple: true
+trigger:
+  - platform: time
+    at: !input open_time
+  - platform: time
+    at: !input close_time
+
+action:
+  - choose:
+      - conditions:
+          - condition: time
+            weekday: !input 'weekday'
+            after: !input open_time
+        sequence:
+          - service: cover.set_cover_position
+            data:
+              position: !input open
+            target: !input entities
+      - conditions:
+          - condition: time
+            weekday: !input 'weekday'
+            after: !input close_time
+        sequence:
+          - service: cover.set_cover_position
+            data:
+              position: !input close
+            target: !input entities
