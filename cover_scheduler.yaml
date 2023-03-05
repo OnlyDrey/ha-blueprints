@@ -62,15 +62,18 @@ blueprint:
 trigger:
   - platform: time
     at: !input open_time
+    id: open_trigger
   - platform: time
     at: !input close_time
+    id: close_trigger
 
 action:
   - choose:
       - conditions:
           - condition: time
             weekday: !input 'weekday'
-            after: !input open_time
+          - condition: trigger
+            id: open_trigger
         sequence:
           - service: cover.set_cover_position
             data:
@@ -79,7 +82,8 @@ action:
       - conditions:
           - condition: time
             weekday: !input 'weekday'
-            after: !input close_time
+          - condition: trigger
+            id: close_trigger
         sequence:
           - service: cover.set_cover_position
             data:
