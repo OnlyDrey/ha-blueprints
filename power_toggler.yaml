@@ -39,7 +39,6 @@ blueprint:
           description: Select which devices to automate.
           selector:
             target:
-              entity:
 
 trigger:
   - platform: device
