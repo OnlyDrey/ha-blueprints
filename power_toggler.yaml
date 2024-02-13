@@ -34,11 +34,6 @@ blueprint:
               step: 500
               min: 5000
               max: 15000
-        conditon:
-          name: Conditional elements
-          description: Select which devices to automate.
-          selector:
-            device:
         entities:
           name: Target entities
           description: Select which devices to automate.
