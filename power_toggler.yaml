@@ -9,7 +9,7 @@ blueprint:
           selector:
             device:
         delay_on:
-          name: Delay timer on
+          name: Delay timer on (minutes)
           description: How long to delay the automation after Wattage change.
           default: 0
           selector:
@@ -32,7 +32,7 @@ blueprint:
           selector:
             action:
         delay_off:
-          name: Delay timer off
+          name: Delay timer off (minutes)
           description: How long to delay the automation after Wattage change.
           default: 0
           selector:
