@@ -8,8 +8,6 @@ blueprint:
           description: Select which devices to trigger from.
           selector:
             device:
-              entity:
-                domain: sensor
         delay:
           name: Delay timer
           description: How long to delay the automation after Wattage change.
