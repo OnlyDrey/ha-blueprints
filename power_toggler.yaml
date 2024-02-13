@@ -15,26 +15,30 @@ blueprint:
           selector:
             time:
         turn_on:
-          name: Power on (W)
+          name: Power on
           description: When to turn on devices.
           default: 7500
           selector:
             number:
-              min: 0
-              max: 50000
+              unit_of_measuremen: "W"
+              step: 500
+              min: 5000
+              max: 15000
         turn_off:
-          name: Power off (W)
+          name: Power off
           description: When to turn off devices.
           default: 8000
           selector:
             number:
-              min: 0
-              max: 50000
-        entities:
-          name: Target entities
-          description: Select which devices to automate.
+              unit_of_measuremen: "W"
+              step: 500
+              min: 5000
+              max: 15000
+        action:
+          name: Target action
+          description: Select what to automate.
           selector:
-            target:
+            action:
 
 trigger:
   - platform: device
@@ -56,11 +60,9 @@ action:
           - condition: trigger
             id: trigger_on
         sequence:
-          - service: switch.turn_on
-            target: !input entities
+          - service: !input action
       - conditions:
           - condition: trigger
             id: trigger_off
         sequence:
-          - service: switch.turn_off
-            target: !input entities
+          - service: !input action
