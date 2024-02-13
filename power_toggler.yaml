@@ -5,7 +5,7 @@ blueprint:
     input: 
         power:
           name: Trigger device
-          description: Select which devices to trigger from.
+          description: Select which devices to trigger power usage from.
           selector:
             device:
         delay_on:
