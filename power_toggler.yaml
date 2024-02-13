@@ -34,11 +34,16 @@ blueprint:
               step: 500
               min: 5000
               max: 15000
-        entities:
-          name: Target entities
-          description: Select which devices to automate.
+        action_on:
+          name: Target action when on
+          description: Select what to automate.
           selector:
-            target:
+            action:
+        action_off:
+          name: Target action when off
+          description: Select what to automate.
+          selector:
+            action:
 
 trigger:
   - platform: device
@@ -60,11 +65,9 @@ action:
           - condition: trigger
             id: trigger_on
         sequence:
-          - service: switch.turn_on //figure out how to create an if statement for climate and switch
-            target: !input entities
+          - action:  !input action_on
       - conditions:
           - condition: trigger
             id: trigger_off
         sequence:
-          - service: switch.turn_off //figure out how to create an if statement for climate and switch
-            target: !input entities
+          - action: !input action_off
