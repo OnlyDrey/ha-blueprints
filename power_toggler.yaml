@@ -60,14 +60,6 @@ trigger:
     above: !input turn_off
     for: !input delay
 
-
-condition:
-  - condition: device
-    type: is_off
-    device_id: 85c5dfda20fa91c08952501f22646fb2
-    entity_id: switch.varmtvannstank
-    domain: switch
-
 action:
   - choose:
       - conditions:
