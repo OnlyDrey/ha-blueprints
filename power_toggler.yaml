@@ -20,18 +20,22 @@ blueprint:
           default: 7500
           selector:
             number:
+              min: 0
+              max: 50000
         turn_off:
           name: Power off (W)
           description: When to turn off devices.
           default: 8000
           selector:
             number:
+              min: 0
+              max: 50000
         entities:
           name: Target entities
           description: Select which devices to automate.
           selector:
             target:
-            
+
 trigger:
   - platform: device
     id: trigger_on
