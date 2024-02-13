@@ -1,0 +1,65 @@
+blueprint:
+    name: Power Toggler
+    description: This blueprint is used to toggle devices based on power usage.
+    domain: automation
+    input: 
+        power:
+          name: Trigger entity
+          description: Select which devices to trigger from.
+          selector:
+            target:
+              entity:
+                domain: sensor
+        delay:
+          name: Delay timer
+          description: How long to delay the automation after Wattage change.
+          default: "00:00:00"
+          selector:
+            time:
+        turn_on:
+          name: Power on (W)
+          description: When to turn on devices..
+          default: 7500
+          selector:
+            number:
+        turn_off:
+          name: Power off (W)
+          description: When to turn off devices.
+          default: 8000
+          selector:
+            number:
+        entities:
+          name: Target entities
+          description: Select which devices to automate.
+          selector:
+            target:
+              entity:
+                domain: switch
+trigger:
+  - platform: device
+    id: trigger_on
+    device_id: !input power
+    domain: sensor
+    below: !input turn_on
+    for: !input delay
+  - platform: device
+    id: trigger_off
+    device_id: !input power
+    domain: sensor
+    above: !input turn_off
+    for: !input delay
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: trigger_on
+        sequence:
+          - service: switch.turn_on
+            target: !input entities
+      - conditions:
+          - condition: trigger
+            id: trigger_off
+        sequence:
+          - service: switch.turn_off
+            target: !input entities
