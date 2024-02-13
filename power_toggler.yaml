@@ -44,6 +44,16 @@ blueprint:
           description: Select what to automate.
           selector:
             action:
+        condition_on:
+          name: Target action when on
+          description: Select what to automate.
+          selector:
+            condition:
+        condition_off:
+          name: Target action when off
+          description: Select what to automate.
+          selector:
+            condition:
 
 trigger:
   - platform: device
@@ -65,9 +75,11 @@ action:
           - condition: trigger
             id: trigger_on
         sequence:
-          - action:  !input action_on
+          - condition: !input condition_on
+          - action: !input action_on
       - conditions:
           - condition: trigger
             id: trigger_off
         sequence:
+          - condition: !input condition_off
           - action: !input action_off
