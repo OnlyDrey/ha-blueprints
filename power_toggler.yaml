@@ -70,10 +70,8 @@ action:
       - conditions:
           - condition: trigger
             id: trigger_on
-        sequence:
-          - action: !input action_on
+        sequence: !input action_on
       - conditions:
           - condition: trigger
             id: trigger_off
-        sequence:
-          - action: !input action_off
+        sequence: !input action_off
