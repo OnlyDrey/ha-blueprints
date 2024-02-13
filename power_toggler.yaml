@@ -8,8 +8,8 @@ blueprint:
           description: Select which devices to trigger from.
           selector:
             device:
-        delay:
-          name: Delay timer
+        delay_on:
+          name: Delay timer on
           description: How long to delay the automation after Wattage change.
           default: "00:00:00"
           selector:
@@ -24,6 +24,22 @@ blueprint:
               step: 500
               min: 5000
               max: 15000
+        action_on:
+          name: Target action when on
+          description: 
+          selector:
+            action:
+        condition_on:
+          name: Condition to turn on
+          description: 
+          selector:
+            condition:
+        delay_off:
+          name: Delay timer off
+          description: How long to delay the automation after Wattage change.
+          default: "00:00:00"
+          selector:
+            time:
         turn_off:
           name: Power off
           description: When to turn off devices.
@@ -34,21 +50,11 @@ blueprint:
               step: 500
               min: 5000
               max: 15000
-        action_on:
-          name: Target action when on
-          description: 
-          selector:
-            action:
         action_off:
           name: Target action when off
           description: 
           selector:
             action:
-        condition_on:
-          name: Condition to turn on
-          description: 
-          selector:
-            condition:
         condition_off:
           name: Condition to turn off
           description: 
@@ -61,13 +67,13 @@ trigger:
     device_id: !input power
     domain: sensor
     below: !input turn_on
-    for: !input delay
+    for: !input delay_on
   - platform: device
     id: trigger_off
     device_id: !input power
     domain: sensor
     above: !input turn_off
-    for: !input delay
+    for: !input delay_off
 
 action:
   - choose:
