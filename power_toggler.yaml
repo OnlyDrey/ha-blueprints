@@ -36,22 +36,22 @@ blueprint:
               max: 15000
         action_on:
           name: Target action when on
-          description: Select what to automate.
+          description: 
           selector:
             action:
         action_off:
           name: Target action when off
-          description: Select what to automate.
+          description: 
           selector:
             action:
         condition_on:
-          name: Target action when on
-          description: Select what to automate.
+          name: Condition to turn on
+          description: 
           selector:
             condition:
         condition_off:
-          name: Target action when off
-          description: Select what to automate.
+          name: Condition to turn off
+          description: 
           selector:
             condition:
 
