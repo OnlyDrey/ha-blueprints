@@ -20,7 +20,7 @@ blueprint:
           default: 7500
           selector:
             number:
-              unit_of_measuremen: "W"
+              unit_of_measurement: "W"
               step: 500
               min: 5000
               max: 15000
@@ -30,7 +30,7 @@ blueprint:
           default: 8000
           selector:
             number:
-              unit_of_measuremen: "W"
+              unit_of_measurement: "W"
               step: 500
               min: 5000
               max: 15000
